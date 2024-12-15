@@ -14,6 +14,8 @@ const Collection = () => {
 
   const [subCategory, setSubCategory] = useState<string[]>([]);
 
+  const [sortType, setSortType] = useState("relevant");
+
   const toggleCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (category.includes(e.target.value)) {
       setCategory((prev) => prev.filter((item) => item !== e.target.value));
@@ -52,6 +54,29 @@ const Collection = () => {
   useEffect(() => {
     applyFilter();
   }, [category, subCategory]);
+
+  const sortProduct = () => {
+    let filterProductsCopy = filterProducts.slice();
+
+    switch (sortType) {
+      // case "relevant":
+      //   setFilterProducts(filterProductsCopy);
+      //   break;
+      case "lowHigh":
+        setFilterProducts(filterProductsCopy.sort((a, b) => a.price - b.price));
+        break;
+      case "highLow":
+        setFilterProducts(filterProductsCopy.sort((a, b) => b.price - a.price));
+        break;
+      default:
+        applyFilter();
+        break;
+    }
+  };
+
+  useEffect(() => {
+    sortProduct();
+  }, [sortType])
 
   const handleShowFilter = () => {
     setShowFilter(!showFilter);
@@ -163,10 +188,11 @@ const Collection = () => {
           <select
             id="sort"
             className="outline-none border hover:border-2 px-3 py-2 cursor-pointer"
+            onChange={(e) => setSortType(e.target.value)}
           >
-            <option value="most-relevant">Most Relevant</option>
-            <option value="low-high">Low to High</option>
-            <option value="high-low">High to Low</option>
+            <option value="relevant">Most Relevant</option>
+            <option value="lowHigh">Low to High</option>
+            <option value="highLow">High to Low</option>
           </select>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
