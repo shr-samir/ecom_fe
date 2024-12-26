@@ -8,6 +8,26 @@ import OurPolicies from "./OurPolicies";
 import PolicyCard from "./PolicyCard";
 import NewsletterBox from "./NewsletterBox";
 import Footer from "./Footer";
+import SearchBar from "./SearchBar";
+import DetailedProductItem from "./DetailedProductItem";
+import ProductPolicies from "./ProductPolicies";
+import Ratings from "./Ratings";
+import RelatedProducts from "./RelatedProducts";
 
-
-export { Navbar, Hero, LatestCollection, ProductItem, Title, BestSeller, OurPolicies, PolicyCard, NewsletterBox, Footer };
+export {
+  Navbar,
+  Hero,
+  LatestCollection,
+  ProductItem,
+  Title,
+  BestSeller,
+  OurPolicies,
+  PolicyCard,
+  NewsletterBox,
+  Footer,
+  SearchBar,
+  DetailedProductItem,
+  ProductPolicies,
+  Ratings,
+  RelatedProducts,
+};

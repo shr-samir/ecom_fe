@@ -10,12 +10,13 @@ import {
   PlaceOrder,
   Orders,
 } from "./pages";
-import { Footer, Navbar } from "./components";
+import { Footer, Navbar, SearchBar } from "./components";
 
 const App = () => {
   return (
     <div className="max-w-7xl mx-auto p-5 lg:px-20 w-full overflow-hidden">
       <Navbar />
+      <SearchBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />

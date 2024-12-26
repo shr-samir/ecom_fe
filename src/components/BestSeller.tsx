@@ -1,26 +1,22 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductItem, Title } from ".";
-import { Product, ShopContext } from "../context/ShopContext";
+import { Product } from "../context/ShopContext";
+import useShopContext from "../hooks/useShopContext";
 
 const BestSeller = () => {
-  const shopContext = useContext(ShopContext);
-
+  // State
   const [bestSeller, setBestSeller] = useState<Product[]>([]);
 
-  if (!shopContext) {
-    return <div className="flex justify-center items-center">Loading ...</div>;
-  }
+  // custom hook
+  const { products } = useShopContext();
 
+  // Effects
   useEffect(() => {
-    if (shopContext?.products) {
-      const bestProduct = shopContext.products.filter(
-        (product) => product.bestseller
-      );
-      setBestSeller(bestProduct.slice(0,5));
+    if (products) {
+      const bestProduct = products.filter((product) => product.bestseller);
+      setBestSeller(bestProduct.slice(0, 5));
     }
-  }, [shopContext]);
-
-  
+  }, [products]);
 
   return (
     <div className="my-8 flex flex-col">

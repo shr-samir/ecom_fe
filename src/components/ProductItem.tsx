@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
+import useShopContext from "../hooks/useShopContext";
 
 interface ProductItemProps {
   id: string;
@@ -15,16 +14,19 @@ const ProductItem: React.FC<ProductItemProps> = ({
   name,
   price,
 }) => {
-  const shopContext = useContext(ShopContext);
+  // custom hook
+  const { currency } = useShopContext();
 
-  if (!shopContext) {
-    return null;
-  }
-
-  const { currency } = shopContext;
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <Link to={`/product/${id}`} className="text-gray-700 cursor-pointer flex flex-col gap-3">
+    <Link
+      to={`/product/${id}`}
+      onClick={scrollToTop}
+      className="text-gray-700 cursor-pointer flex flex-col gap-3"
+    >
       <div className="overflow-hidden ">
         <img
           src={image[0]}

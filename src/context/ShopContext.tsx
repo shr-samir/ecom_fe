@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useState } from "react";
 import { products } from "../assets/frontend_assets/assets";
 
 export interface Product {
@@ -9,12 +9,19 @@ export interface Product {
   bestseller: boolean;
   category: string;
   subCategory: string;
+  description: string;
+  sizes: string[];
+  date: number;
 }
 
-interface ShopContextType {
+export interface ShopContextType {
   products: Product[];
   currency: string;
   deliveryFee: number;
+  searchText: string;
+  showSearchBar: boolean;
+  setSearchText: (text: string) => void;
+  setShowSearchBar: (show: boolean) => void;
 }
 
 interface ShopContextProviderProps {
@@ -29,10 +36,17 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = (props) => {
   const currency = "$";
   const deliveryFee = 10;
 
+  const [searchText, setSearchText] = useState(""); // value inside search bar
+  const [showSearchBar, setShowSearchBar] = useState(false); // to hide/show the search bar
+
   const value = {
     products,
     currency,
     deliveryFee,
+    searchText,
+    setSearchText,
+    showSearchBar,
+    setShowSearchBar,
   };
 
   return (

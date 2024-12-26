@@ -2,7 +2,7 @@ import { assets } from "../assets/frontend_assets/assets";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col sm:flex-row border border-gray-400">
+    <div className="flex flex-col sm:flex-row mt-8">
 
       {/* Hero left side */}
       <div className="flex  items-center justify-center sm:w-1/2 p-12">

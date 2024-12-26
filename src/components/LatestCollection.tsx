@@ -1,25 +1,21 @@
-import { useContext, useEffect, useState } from "react";
-import { ShopContext } from "../context/ShopContext";
+import { useEffect, useState } from "react";
 import { ProductItem, Title } from ".";
 import { Product } from "../context/ShopContext";
+import useShopContext from "../hooks/useShopContext";
 
 const LatestCollection = () => {
-  const shopContext = useContext(ShopContext);
-
+  // State
   const [latestProducts, setLatestProducts] = useState<Product[]>([]);
-
-  if (!shopContext) {
-    return <div className="flex justify-center items-center">Loading ...</div>;
-  }
-
-  useEffect(() => {
-    if (shopContext?.products) setLatestProducts(shopContext.products.slice(0, 10));
-  }, [shopContext]);
-
   
+  // custom hook
+  const {products} = useShopContext();
+
+  // Effects
+  useEffect(() => {
+    if (products) setLatestProducts(products.slice(0, 10));
+  }, [products]);
 
   // const products = shopContext;
-
   // console.log("Products: ", products);
 
   return (

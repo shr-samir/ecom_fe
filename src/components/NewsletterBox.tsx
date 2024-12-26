@@ -1,4 +1,5 @@
 const NewsletterBox = () => {
+  // Event handlers
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
