@@ -28,7 +28,7 @@ const Product = () => {
 
   return (
     <div className="my-10 flex flex-col gap-14">
-      <DetailedProductItem />
+      <DetailedProductItem id={productId} />
       <div className="flex flex-col text-sm">
         <div className="flex">
           <div

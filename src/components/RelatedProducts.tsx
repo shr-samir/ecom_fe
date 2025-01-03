@@ -25,7 +25,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
     const relatedProducts = products.filter(
       (item) => item.category === category && item.subCategory === subCategory && item._id !== id
     );
-    setRelatedProducts(relatedProducts);
+    setRelatedProducts(relatedProducts.slice(0, 5));
   };
 
   return <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">{

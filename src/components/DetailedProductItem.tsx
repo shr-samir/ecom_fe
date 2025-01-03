@@ -1,10 +1,12 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useShopContext from "../hooks/useShopContext";
 import { Product } from "../context/ShopContext";
 import { ProductPolicies, Ratings } from ".";
 
-const DetailedProductItem = () => {
+interface DetailedProductItemProps {
+  id: string | undefined;
+}
+const DetailedProductItem: React.FC<DetailedProductItemProps> = ({ id }) => {
   const ratingsCount = 122;
   const [productData, setProductData] = useState<Product | undefined>(
     undefined
@@ -12,21 +14,19 @@ const DetailedProductItem = () => {
   const [currentImage, setCurrentImage] = useState<string | undefined>("");
   const [currentSize, setCurrentSize] = useState<string | undefined>("");
 
-  const { productId } = useParams();
-
-  const { products, currency } = useShopContext();
+  const { products, currency, addToCart } = useShopContext();
 
   const fetchProductData = () => {
-    const productDetails = products.find((item) => item._id === productId);
+    if (!id) return;
+    const productDetails = products.find((item) => item._id === id);
     setProductData(productDetails);
     setCurrentImage(productDetails?.image[0]);
   };
 
   useEffect(() => {
     fetchProductData();
-  }, [productId]);
+  }, [id]);
 
-  
   return productData && productData != undefined ? (
     <div className="w-full flex flex-col lg:flex-row gap-10 lg:gap-5">
       {/* image side  */}
@@ -34,8 +34,16 @@ const DetailedProductItem = () => {
         <div className="flex md:flex-col gap-3 overflow-hidden overflow-x-scroll lg:overflow-y-scroll md:h-[450px]  lg:h-[360px] xl:h-[450px] order-2 md:order-1 max-w-[390px]">
           {productData.image.map((img, index) => {
             return (
-              <div className="max-w-28 cursor-pointer flex items-center justify-center" key={index} onClick={() => setCurrentImage(img)}>
-                <img src={img} alt={`Product ${productData.name}`} className="object-contain"/>
+              <div
+                className="max-w-28 cursor-pointer flex items-center justify-center"
+                key={index}
+                onClick={() => setCurrentImage(img)}
+              >
+                <img
+                  src={img}
+                  alt={`Product ${productData.name}`}
+                  className="object-contain"
+                />
               </div>
             );
           })}
@@ -44,7 +52,7 @@ const DetailedProductItem = () => {
           <img src={currentImage} alt={`Product ${productData.name}`} />
         </div>
       </div>
-      
+
       {/* details side */}
       <div className="flex flex-col gap-8 font-outfit lg:w-1/2">
         <div className="flex flex-col gap-5">
@@ -65,7 +73,17 @@ const DetailedProductItem = () => {
               <p className="">Select Size</p>
               <div className="flex gap-2">
                 {productData.sizes.map((size) => (
-                  <button type="button" className={`px-5 py-3 cursor-pointer ${currentSize === size ? "bg-gray text-white" : "bg-lightGray "}`} value={size} key={size} onClick={() => setCurrentSize(size)}>
+                  <button
+                    type="button"
+                    className={`px-5 py-3 cursor-pointer ${
+                      currentSize === size
+                        ? "outline outline-1 outline-gray"
+                        : " "
+                    }`}
+                    value={size}
+                    key={size}
+                    onClick={() => setCurrentSize(size)}
+                  >
                     {size}
                   </button>
                 ))}
@@ -74,12 +92,19 @@ const DetailedProductItem = () => {
             <button
               type="submit"
               className="bg-black w-fit px-6 py-3 text-white text-sm cursor-pointer active:bg-gray"
+              onClick={() => {
+                if (currentSize) addToCart(productData._id, currentSize);
+                else {
+                  console.error("Size is undefined.");
+                  alert("Please select a size");
+                }
+              }}
             >
               ADD TO CART
             </button>
           </form>
         </div>
-        <hr className="text-gray opacity-50"/>
+        <hr className="text-gray opacity-50" />
         <ProductPolicies />
       </div>
     </div>

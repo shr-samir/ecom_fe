@@ -7,7 +7,7 @@ import useShopContext from "../hooks/useShopContext";
 const Navbar = () => {
   // States
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [itemsCount, setItemsCount] = useState(0);
+  // const [itemsCount, setItemsCount] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Refs
@@ -15,7 +15,7 @@ const Navbar = () => {
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Custom hook
-  const { showSearchBar, setShowSearchBar } = useShopContext();
+  const { showSearchBar, setShowSearchBar} = useShopContext();
 
   // Effects
   useEffect(() => {
@@ -30,22 +30,19 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const cartCounter = () => {
-    setItemsCount(itemsCount + 1);
-  };
 
   const handleMouseEnter = () => {
     if (hoverTimeoutRef.current) {
       clearTimeout(hoverTimeoutRef.current);
     }
     setIsProfileOpen(true);
-  }
+  };
 
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setIsProfileOpen(false);
     }, 200);
-  }
+  };
 
   const handleOutsideClick = (event: MouseEvent) => {
     if (
@@ -138,11 +135,8 @@ const Navbar = () => {
             className="w-5 max-w-5 cursor-pointer"
             alt="Cart Icon"
           />
-          <div
-            className="absolute w-4 h-4 text-white bg-black rounded-full text-[8px] text-center content-center left-2.5 top-2"
-            onClick={cartCounter}
-          >
-            {itemsCount}
+          <div className="absolute w-4 h-4 text-white bg-black rounded-full text-[8px] text-center content-center left-2.5 top-2">
+            0
           </div>
         </Link>
 

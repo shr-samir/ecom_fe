@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { products } from "../assets/frontend_assets/assets";
 
 export interface Product {
@@ -22,8 +22,15 @@ export interface ShopContextType {
   showSearchBar: boolean;
   setSearchText: (text: string) => void;
   setShowSearchBar: (show: boolean) => void;
+  addToCart: (productId: string, size: string) => void;
+  cartItems: CartItem[];
 }
 
+export interface CartItem {
+  product: Product;
+  size: string;
+  quantity: number;
+}
 interface ShopContextProviderProps {
   children: ReactNode;
 }
@@ -38,6 +45,27 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = (props) => {
 
   const [searchText, setSearchText] = useState(""); // value inside search bar
   const [showSearchBar, setShowSearchBar] = useState(false); // to hide/show the search bar
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    console.log(cartItems)
+  },[cartItems]);
+
+  const addToCart = (productId: string, size: string) => {
+    let cartItemsCopy = structuredClone(cartItems);
+    const product = products.find((item) => item._id === productId);
+    if (product) {
+      const existingCartItem = cartItemsCopy.find(
+        (item) => item.product._id === productId && item.size === size
+      );
+      if (existingCartItem) {
+        existingCartItem.quantity += 1;
+      } else {
+        cartItemsCopy.push({ product, size, quantity: 1 });
+      }
+      setCartItems(cartItemsCopy);
+    }
+  };
 
   const value = {
     products,
@@ -47,6 +75,8 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = (props) => {
     setSearchText,
     showSearchBar,
     setShowSearchBar,
+    addToCart,
+    cartItems,
   };
 
   return (
