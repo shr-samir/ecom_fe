@@ -68,7 +68,18 @@ const DetailedProductItem: React.FC<DetailedProductItemProps> = ({ id }) => {
             {productData.price}
           </p>
           <p className="text-gray">{productData.description}</p>
-          <form method="POST" className="flex flex-col gap-8">
+          <form
+            method="POST"
+            className="flex flex-col gap-8"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (currentSize) addToCart(productData._id, currentSize);
+              else {
+                console.error("Size is undefined.");
+                alert("Please select a size");
+              }
+            }}
+          >
             <div className="flex flex-col gap-3">
               <p className="">Select Size</p>
               <div className="flex gap-2">
@@ -92,13 +103,6 @@ const DetailedProductItem: React.FC<DetailedProductItemProps> = ({ id }) => {
             <button
               type="submit"
               className="bg-black w-fit px-6 py-3 text-white text-sm cursor-pointer active:bg-gray"
-              onClick={() => {
-                if (currentSize) addToCart(productData._id, currentSize);
-                else {
-                  console.error("Size is undefined.");
-                  alert("Please select a size");
-                }
-              }}
             >
               ADD TO CART
             </button>

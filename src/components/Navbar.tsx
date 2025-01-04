@@ -7,7 +7,7 @@ import useShopContext from "../hooks/useShopContext";
 const Navbar = () => {
   // States
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  // const [itemsCount, setItemsCount] = useState(0);
+  const [itemsCount, setItemsCount] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Refs
@@ -15,7 +15,7 @@ const Navbar = () => {
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Custom hook
-  const { showSearchBar, setShowSearchBar} = useShopContext();
+  const { showSearchBar, setShowSearchBar, cartItems } = useShopContext();
 
   // Effects
   useEffect(() => {
@@ -26,10 +26,16 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const totalItemsCount = cartItems.reduce(
+      (acc, item) => acc + item.quantity,
+      0
+    );
+    setItemsCount(totalItemsCount);
+  }, [cartItems]);
+
   // Event handlers
-
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
 
   const handleMouseEnter = () => {
     if (hoverTimeoutRef.current) {
@@ -55,9 +61,17 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between items-center pb-5 gap-8 border-b border-gray border-opacity-50">
-      <Link to="/">
-        <img src={assets.logo} className="w-36" alt="Logo" />
-      </Link>
+      <div className="flex gap-2">
+        <img
+          src={assets.menu_icon}
+          className="w-5 cursor-pointer md:hidden object-contain"
+          alt="Menu Icon"
+          onClick={toggleMenu}
+        />
+        <Link to="/">
+          <img src={assets.logo} className="w-36" alt="Logo" />
+        </Link>
+      </div>
 
       <ul className="md:flex gap-4 hidden">
         <li>
@@ -136,16 +150,9 @@ const Navbar = () => {
             alt="Cart Icon"
           />
           <div className="absolute w-4 h-4 text-white bg-black rounded-full text-[8px] text-center content-center left-2.5 top-2">
-            0
+            {itemsCount}
           </div>
         </Link>
-
-        <img
-          src={assets.menu_icon}
-          className="w-5 cursor-pointer md:hidden"
-          alt="Menu Icon"
-          onClick={toggleMenu}
-        />
       </div>
 
       {/* Menu for small screen */}

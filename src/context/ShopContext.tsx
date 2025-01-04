@@ -23,10 +23,11 @@ export interface ShopContextType {
   setSearchText: (text: string) => void;
   setShowSearchBar: (show: boolean) => void;
   addToCart: (productId: string, size: string) => void;
-  cartItems: CartItem[];
+  cartItems: CartItemProps[];
+  setCartItems: (cartItems: CartItemProps[]) => void;
 }
 
-export interface CartItem {
+export interface CartItemProps {
   product: Product;
   size: string;
   quantity: number;
@@ -40,16 +41,16 @@ export const ShopContext = createContext<ShopContextType | undefined>(
 );
 
 const ShopContextProvider: React.FC<ShopContextProviderProps> = (props) => {
-  const currency = "$";
+  const currency = "Rs. ";
   const deliveryFee = 10;
 
   const [searchText, setSearchText] = useState(""); // value inside search bar
   const [showSearchBar, setShowSearchBar] = useState(false); // to hide/show the search bar
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItemProps[]>([]);
 
   useEffect(() => {
-    console.log(cartItems)
-  },[cartItems]);
+    console.log(cartItems);
+  }, [cartItems]);
 
   const addToCart = (productId: string, size: string) => {
     let cartItemsCopy = structuredClone(cartItems);
@@ -77,6 +78,7 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = (props) => {
     setShowSearchBar,
     addToCart,
     cartItems,
+    setCartItems,
   };
 
   return (

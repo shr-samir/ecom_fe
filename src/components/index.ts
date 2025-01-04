@@ -13,6 +13,7 @@ import DetailedProductItem from "./DetailedProductItem";
 import ProductPolicies from "./ProductPolicies";
 import Ratings from "./Ratings";
 import RelatedProducts from "./RelatedProducts";
+import CartItem from "./CartItem";
 
 export {
   Navbar,
@@ -30,4 +31,5 @@ export {
   ProductPolicies,
   Ratings,
   RelatedProducts,
+  CartItem
 };
