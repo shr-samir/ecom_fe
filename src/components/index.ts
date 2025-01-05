@@ -14,6 +14,8 @@ import ProductPolicies from "./ProductPolicies";
 import Ratings from "./Ratings";
 import RelatedProducts from "./RelatedProducts";
 import CartItem from "./CartItem";
+import DeliveryInfoForm from "./DeliveryInfoForm";
+import CartTotal from "./CartTotal";
 
 export {
   Navbar,
@@ -31,5 +33,7 @@ export {
   ProductPolicies,
   Ratings,
   RelatedProducts,
-  CartItem
+  CartItem,
+  DeliveryInfoForm,
+  CartTotal
 };

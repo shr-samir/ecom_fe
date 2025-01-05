@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useState } from "react";
 import { products } from "../assets/frontend_assets/assets";
 
 export interface Product {
@@ -25,6 +25,7 @@ export interface ShopContextType {
   addToCart: (productId: string, size: string) => void;
   cartItems: CartItemProps[];
   setCartItems: (cartItems: CartItemProps[]) => void;
+  cartItemsPrice: number;
 }
 
 export interface CartItemProps {
@@ -48,9 +49,9 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = (props) => {
   const [showSearchBar, setShowSearchBar] = useState(false); // to hide/show the search bar
   const [cartItems, setCartItems] = useState<CartItemProps[]>([]);
 
-  useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
+  const cartItemsPrice = cartItems.reduce((acc, item) => {
+    return acc + item.product.price * item.quantity;
+  }, 0);
 
   const addToCart = (productId: string, size: string) => {
     let cartItemsCopy = structuredClone(cartItems);
@@ -79,6 +80,7 @@ const ShopContextProvider: React.FC<ShopContextProviderProps> = (props) => {
     addToCart,
     cartItems,
     setCartItems,
+    cartItemsPrice,
   };
 
   return (

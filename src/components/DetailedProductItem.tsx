@@ -24,6 +24,7 @@ const DetailedProductItem: React.FC<DetailedProductItemProps> = ({ id }) => {
   };
 
   useEffect(() => {
+    setCurrentSize("")
     fetchProductData();
   }, [id]);
 
