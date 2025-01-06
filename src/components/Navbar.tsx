@@ -118,11 +118,13 @@ const Navbar = () => {
           onMouseLeave={() => handleMouseLeave()}
           ref={profileDropdownRef}
         >
-          <img
-            src={assets.profile_icon}
-            className="w-5 cursor-pointer"
-            alt="Profile Icon"
-          />
+          <Link to="/login">
+            <img
+              src={assets.profile_icon}
+              className="w-5 cursor-pointer"
+              alt="Profile Icon"
+            />
+          </Link>
 
           {/* Profile dropdown */}
           {isProfileOpen && (
