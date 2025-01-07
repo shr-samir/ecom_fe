@@ -9,6 +9,7 @@ import {
   Login,
   PlaceOrder,
   Orders,
+  Register
 } from "./pages";
 import { Footer, Navbar, SearchBar } from "./components";
 
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
       <Footer />
     </div>

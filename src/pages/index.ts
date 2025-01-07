@@ -7,6 +7,7 @@ import Product from "./Product";
 import Cart from "./Cart";
 import PlaceOrder from "./PlaceOrder";
 import Orders from "./Orders";
+import Register from "./Register";
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   Cart,
   PlaceOrder,
   Orders,
+  Register
 };
