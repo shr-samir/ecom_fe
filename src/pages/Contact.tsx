@@ -21,7 +21,7 @@ const Contact = () => {
           </p>
           <p className="font-semibold text-lg">Careers at Forever</p>
           <p>Learn more about our teams and job openings.</p>
-          <button className="outline outline-mdGray px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500">
+          <button className="border border-mdGray px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500">
             Explore Jobs
           </button>
         </div>

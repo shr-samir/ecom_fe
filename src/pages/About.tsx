@@ -5,8 +5,8 @@ const About = () => {
   return (
     <div className="mt-12 flex flex-col gap-16 justify-center font-outfit">
       <Title text1="ABOUT" text2="US" />
-      <div className="flex flex-col md:flex-row gap-16">
-        <img src={assets.about_img} className="w-full md:max-w-[500px]" />
+      <div className="flex flex-col lg:flex-row gap-16">
+        <img src={assets.about_img} className="w-full lg:max-w-[500px]" />
         <div className="text-md text-gray-600 flex flex-col gap-6 justify-center leading-6">
           <span>
             Forever was born out of a passion for innovation and a desire to

@@ -5,9 +5,9 @@ import useShopContext from "../hooks/useShopContext";
 const PlaceOrder = () => {
   const { deliveryFee, currency, cartItemsPrice } = useShopContext();
   return (
-    <div className="w-full flex flex-col lg:flex-row justify-between gap-12 mt-12">
+    <div className="w-full flex flex-col lg:flex-row justify-between items-start gap-12 mt-12">
       <DeliveryInfoForm />
-      <div className="md:w-1/2 max-w-xl flex flex-col gap-12">
+      <div className="w-full md:w-1/2 max-w-xl flex flex-col gap-12">
         {/* Cart Total section */}
         <div className="flex flex-col gap-5">
           <div>
@@ -71,7 +71,7 @@ const PlaceOrder = () => {
               className="border border-mdGray flex gap-5 px-5 py-2 justify-start cursor-pointer"
             >
               <input type="radio" name="cod" id="cod" className="text-mdGray" />
-              <h6 className="text-xs">CASH ON DELIVERY</h6>
+              <h6 className="text-xs font-medium">CASH ON DELIVERY</h6>
             </label>
           </div>
           <div className="flex items-center justify-end">

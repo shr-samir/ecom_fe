@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Login = () => {
-  const [isLogin, setIsLogin] = useState<Boolean>(false);
+  const [isLogin, setIsLogin] = useState<Boolean>(true);
   return (
     <div className="flex items-center justify-center font-outfit">
       <form className="flex flex-col gap-4 sm:max-w-96 w-[90%] mt-24">
